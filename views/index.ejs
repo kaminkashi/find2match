@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kaminkashi.com</title>
+  <!-- Favicon for various devices -->
+  <link rel="icon" href="images/kaminkashiLogo.jpg" sizes="16x16" type="image/png">
+  <link rel="icon" href="images/kaminkashiLogo.jpg" sizes="32x32" type="image/png">
+  <link rel="icon" href="images/kaminkashiLogo.jpg" sizes="48x48" type="image/png">
+
+  <!-- For iOS -->
+  <link rel="apple-touch-icon" href="images/kaminkashiLogo.jpg" sizes="57x57">
+  <link rel="apple-touch-icon" href="images/kaminkashiLogo.jpg" sizes="72x72">
+  <link rel="apple-touch-icon" href="images/kaminkashiLogo.jpg" sizes="114x114">
+  <link rel="apple-touch-icon" href="images/kaminkashiLogo.jpg" sizes="144x144">
+
+  <!-- For Android -->
+  <link rel="icon" type="image/png" href="images/kaminkashiLogo.jpg" sizes="192x192">
+  <link rel="icon" type="image/png" href="images/kaminkashiLogo.jpg" sizes="512x512">
+
+  <link rel="stylesheet" href="styleIndex.css">
+  <style>
+    /* Styles for the transparent popup */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .popup-content {
+      position: relative;
+      background: linear-gradient(to right, #3498db, #8e44ad);
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      max-width: 300px;
+      margin: auto;
+    }
+
+    .cut-option {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      cursor: pointer;
+      color: #fff;
+      font-size: 20px;
+    }
+
+    /* Add radius to the header */
+    header {
+      background: linear-gradient(to right, #3498db, #8e44ad);
+      position: relative;
+      height: 40px;
+      padding: 10px;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      bottom: 22vh;
+    }
+
+    .login-option {
+      text-align: right;
+      margin-right: 20px;
+    }
+
+    .loginBtn {
+      color: #fff;
+      text-decoration: none;
+      padding: 5px 10px;
+      border: 1px solid #fff;
+      border-radius: 5px;
+    }
+
+    .loginBtn:hover {
+      background: #fff;
+      color: #3498db;
+    }
+
+    .loading-container {
+      text-align: center;
+    }
+
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* CSS for the card */
+    .card {
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px;
+      max-width: 300px;
+    }
+
+    /* CSS for the legend */
+    legend {
+      font-weight: bold;
+      color: #333;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+
+    /* Styling the form elements */
+    input[type="text"],
+    button {
+      padding: 8px;
+      margin-bottom: 10px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    } 
+    .banner-video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 23.53%; /* 200px height with 850px width aspect ratio */
+}
+
+.banner-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.space-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.space-background::before,
+.space-background::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
+}
+
+.space-background::before {
+  z-index: -1;
+  transform: rotate(45deg);
+}
+
+.space-background::after {
+  z-index: -2;
+  transform: rotate(-45deg);
+}
+
+  </style>
+  <title>kaminkashi</title>
+</head>
+
+<body>
+  <img class="banner-img" src="images/AmarKumar.png" alt="Banner Image">
+  <header>
+    <div class="hamburger-menu" id="menuIcon">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="login-option">
+      <a href="/home" class="loginBtn"><i class="fa fa-user"></i> search</a>
+    </div>
+  </header>
+  <div class="banner-video-container">
+    <video class="banner-video" autoplay muted loop>
+      <source src="images/0301.mp4" type="video/mp4">
+      <!-- Add additional source elements for different video formats if needed -->
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <!-- Transparent Popup -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup-content">
+      <div class="cut-option" onclick="closePopup()">✂️</div>
+      <p>Welcome to kaminkashi.com!</p>
+      <p>"This is the beta version of my website.<span class="version">Version 1.0</span>"</p>
+    </div>
+  </div>
+
+  <div class="shooting-stars"></div>
+  <div class="space-background">
+
+  </div>
+
+  <nav id="myNav" class="navbar">
+    <a href="#" class="shine">HOME</a>
+    <a href="https://kaminkashi.github.io/myPPersonal/" class="shine">PORTFOLIO</a>
+    <a href="#" class="shine">ABOUT</a>
+    <a href="#" class="shine">CONTACT</a>
+    <a href="#" class="shine">HELP</a>
+    <a href="/settingTool" class="shine">SETTINGS</a>
+  </nav>
+
+  <div class="container">
+    <h1 id="portfolio-heading">My Portfolio</h1>
+
+    <div class="portfolio">
+      <div class="portfolio-item">
+        <img class="portfolio-img" src="images/peresentationServices.jpg" alt="Project 1">
+        <div class="portfolio-content">
+          <a href="#" class="portfolio-link">
+            <h3 class="portfolio-title">Data Analysis</h3>
+          </a>
+          <p class="portfolio-description">MS-excel / MS-word</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-img" src="images/YtImgeLogo (1).png" alt="Project 2">
+        <div class="portfolio-content">
+          <a href="https://kaminkashi.github.io/myPPersonal/" class="portfolio-link">
+            <h3 class="portfolio-title">METAHUMAN</h3>
+          </a>
+          <p class="portfolio-description">Metaverse Character</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-img" src="images/UE5_Port.jpg" alt="Project 3">
+        <div class="portfolio-content">
+          <a href="#" class="portfolio-link">
+            <h3 class="portfolio-title">Unreal Engine 5</h3>
+          </a>
+          <p class="portfolio-description">Gaming and animation</p>
+        </div>
+      </div>
+      <!-- Add more portfolio items as needed -->
+      <div class="portfolio-item">
+        <img class="portfolio-img" src="images/vediosEditing5.jpg" alt="Project 3">
+        <div class="portfolio-content">
+          <a href="#" class="portfolio-link">
+            <h3 class="portfolio-title">Video Editing</h3>
+          </a>
+          <p class="portfolio-description">videos creating</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-img" src="images/digital marketing.jpg" alt="Project 3">
+        <div class="portfolio-content">
+          <a href="#" class="portfolio-link">
+            <h3 class="portfolio-title">Digital MArketing</h3>
+          </a>
+          <p class="portfolio-description">Social media Marketing</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-img" src="images/UE5.jpg" alt="Project 3">
+        <div class="portfolio-content">
+          <a href="#" class="portfolio-link">
+            <h3 class="portfolio-title">Unreal Engine 5</h3>
+          </a>
+          <p class="portfolio-description">animation videos & Charactors</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-img" src="images/digitalMArketing.jpg" alt="Project 3">
+        <div class="portfolio-content">
+          <a href="#" class="portfolio-link">
+            <h3 class="portfolio-title">Content Writing</h3>
+          </a>
+          <p class="portfolio-description">Write Contents for Social Media</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-img" src="images/contentWriterGirl.jpg" alt="Project 3">
+        <div class="portfolio-content">
+          <a href="#" class="portfolio-link">
+            <h3 class="portfolio-title">Script Creater</h3>
+          </a>
+          <p class="portfolio-description">Script Creating</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-img" src="images/blenderServices.jpg" alt="Project 3">
+        <div class="portfolio-content">
+          <a href="#" class="portfolio-link">
+            <h3 class="portfolio-title">Blender</h3>
+          </a>
+          <p class="portfolio-description">Graphics Designing</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+
+        <img class="portfolio-img" src="images/08-51-41-992_512.gif" alt="Project 3">
+        <div class="portfolio-content">
+          <a href="#" class="portfolio-link">
+            <h3 class="portfolio-title">Coming soon</h3>
+          </a>
+          <p class="portfolio-description">Description of Project</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-img" src="images/02-15-52-868_512.gif" alt="Project 3">
+        <div class="portfolio-content">
+          <a href="#" class="portfolio-link">
+            <h3 class="portfolio-title">Coming soon</h3>
+          </a>
+          <p class="portfolio-description">Description of Project</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-img" src="images/03-38-03-793_512.gif" alt="Project 3">
+        <div class="portfolio-content">
+          <a href="#" class="portfolio-link">
+            <h3 class="portfolio-title">Coming soon</h3>
+          </a>
+          <p class="portfolio-description">Description of Project</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-img" src="images/20240224_164009.gif" alt="Project 3">
+        <div class="portfolio-content">
+          <a href="#" class="portfolio-link">
+            <h3 class="portfolio-title">Coming soon</h3>
+          </a>
+          <p class="portfolio-description">Description of Project</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-img" src="images/13-59-56-530_512.webp" alt="Project 3">
+        <div class="portfolio-content">
+          <a href="#" class="portfolio-link">
+            <h3 class="portfolio-title">Coming soon</h3>
+          </a>
+          <p class="portfolio-description">Description of Project</p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-img" src="images/13-59-56-530_512.webp" alt="Project 3">
+        <div class="portfolio-content">
+          <a href="#" class="portfolio-link">
+            <h3 class="portfolio-title">Coming soon</h3>
+          </a>
+          <p class="portfolio-description">Description of Project </p>
+        </div>
+      </div>
+      <div class="portfolio-item">
+        <img class="portfolio-img" src="images/13-59-56-530_512.webp" alt="Project 3">
+        <div class="portfolio-content">
+          <a href="#" class="portfolio-link">
+            <h3 class="portfolio-title">Coming soon</h3>
+          </a>
+          <p class="portfolio-description">Description of Project </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 kaminkashi.com. All rights reserved. | <span class="version">Version 1.0</span></p>
+  </footer>
+
+  <script src="/JsIndex.js"></script>
+  <script>
+    const portfolioTitles = document.querySelectorAll('.portfolio-title');
+
+    portfolioTitles.forEach(title => {
+      title.addEventListener('mouseover', () => {
+        title.classList.add('shine-animation');
+      });
+
+      title.addEventListener('mouseout', () => {
+        title.classList.remove('shine-animation');
+      });
+    });
+
+    // Array of different contents
+    const contents = [
+      "This is my portfolio",
+      "Welcome to my website",
+      "Explore my projects here",
+      "Get to know my work",
+      // Add more content as needed
+    ];
+
+    // Function to display content with typing animation
+    function displayContent() {
+      const heading = document.getElementById('portfolio-heading');
+      let index = 0;
+      setInterval(() => {
+        heading.innerHTML = `<span class="typing-animation">${contents[index]}</span>`;
+        index = (index + 1) % contents.length;
+      }, 5000); // Change content every 5 seconds (5000 milliseconds)
+    }
+
+    // Call the function to start displaying content
+    displayContent();
+
+    // Array of image URLs
+    const imageUrls = [
+      "images/AmarKumar.png",
+      "images/Recording 2024-03-05 234435.gif",
+      "images/Screenshot 2024-03-08 215101.png",
+      "images/Untitled design (4).png",
+      // Add more image URLs as needed
+    ];
+
+    // Function to change image at regular intervals
+    function changeImage() {
+      const bannerImg = document.querySelector('.banner-img');
+      let index = 0;
+      setInterval(() => {
+        bannerImg.style.opacity = 0; // Fade out
+        setTimeout(() => {
+          bannerImg.src = imageUrls[index];
+          index = (index + 1) % imageUrls.length;
+          bannerImg.style.opacity = 1; // Fade in
+        }, 500); // Wait for 500 milliseconds before changing the image
+      }, 5000); // Change image every 5 seconds (5000 milliseconds)
+    }
+
+    // Call the function to start changing images
+    changeImage();
+
+
+  </script>
+</body>
+
+</html>
